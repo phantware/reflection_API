@@ -7,6 +7,7 @@ class Reflection {
   constructor() {
     this.reflections = [];
   }
+
   // Create a reflection
   create(data) {
     const newReflection = {
@@ -36,9 +37,9 @@ class Reflection {
   update(id, data) {
     const reflection = this.findOne(id);
     const index = this.reflections.indexOf(reflection);
-    this.reflections[index].success = data['success'] || reflection.success;
-    this.reflections[index].lowPoint = data['lowPoint'] || reflection.lowPoint;
-    this.reflections[index].lowPoint = data['takeAway'] || reflection.takeAway;
+    this.reflections[index].success = data.success || reflection.success;
+    this.reflections[index].lowPoint = data.lowPoint || reflection.lowPoint;
+    this.reflections[index].takeAway = data.takeAway || reflection.takeAway;
     this.reflections[index].modifiedDate = moment.now();
     return this.reflections[index];
   }
