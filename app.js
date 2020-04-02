@@ -1,12 +1,25 @@
 import express from 'express';
-import Reflection from './src/usingDB/controllers/reflection';
+import dotenv from 'dotenv';
+import ReflectionWithJsObject from './src/usingJSObject/controllers/reflection';
+import ReflectionWithDB from './src/usingDB/controllers/reflection';
 import { multerUploads, dataUri } from './src/usingDB/multer';
 import {
   uploader,
   cloudinaryConfig
 } from './src/usingDB/config/cloudinaryConfig';
 
+dotenv.config();
+const Reflection =
+  process.env.TYPE === 'db' ? ReflectionWithDB : ReflectionWithJsObject;
+
 const app = express();
+
+console.log(` NODE_TYPE: ${process.env.TYPE} `);
+console.log(`app: ${app.get('env')}`);
+
+if (app.get('env') === 'development') {
+  console.log('Morgan runing');
+}
 
 app.use(express.json());
 app.use('*', cloudinaryConfig);
@@ -47,4 +60,5 @@ app.get('/api/v1/reflections', Reflection.getAll);
 app.get('/api/v1/reflections/:id', Reflection.getOne);
 app.put('/api/v1/reflections/:id', Reflection.update);
 app.delete('/api/v1/reflections:id', Reflection.delete);
+
 app.listen(port, () => console.log(`listening at ${port}`));

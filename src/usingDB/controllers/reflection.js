@@ -6,9 +6,9 @@ const Reflection = {
   // Create a reflection
   async create(req, res) {
     const text = `INSERT INTO reflections(id, success, low_point, take_away, created_date, modified_date) VALUES($1,$2,$3,$4,$5,$6)  returning *`;
-    const { low_point, take_away } = req.body;
+    const { success, low_point, take_away } = req.body;
     const values = [
-      uuidv4(),
+      uuid.v4(),
       success,
       low_point,
       take_away,
@@ -25,10 +25,10 @@ const Reflection = {
   },
   // Get all reflections
   async getAll(req, res) {
-    const findAllAllQuery = 'SELECT * FROM reflections';
+    const findAllQuery = 'SELECT * FROM reflections';
     try {
-      const { rows } = await db.query(findAllAllQuery);
-      return res.status(200).send({ rows, rowCount });
+      const { rows } = await db.query(findAllQuery);
+      return res.status(200).send({ rows });
     } catch (error) {
       return res.status(400).send(error);
     }
