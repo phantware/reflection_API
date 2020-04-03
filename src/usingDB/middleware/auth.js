@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import db from '../db';
 
 const Auth = {
-  //Verify Token
+  // Verify Token
 
   async verifyToken(req, res, next) {
     const token = req.headers['x-access-token'];
