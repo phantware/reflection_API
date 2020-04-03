@@ -1,17 +1,17 @@
 import moment from 'moment';
-const uuid = require('uuid');
 import db from '../db/index';
-import helper from './helper';
 import Helper from './helper';
 
+const uuid = require('uuid');
+
 const User = {
-  //Create a user
+  // Create a user
 
   async create(req, res) {
     if (!req.body.email || !req.body.password) {
       return res.status(400).send({ message: 'Some values are missing' });
     }
-    if (!Helper.isValidEmail(req.body.email)) {
+    if (!helper.isValidEmail(req.body.email)) {
       return res
         .status(400)
         .send({ message: 'Please enter a valid email address' });
