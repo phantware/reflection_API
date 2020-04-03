@@ -13,7 +13,6 @@ const Helper = {
   },
 
   // isValidEmail Helper Method
-  
   isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
   },
