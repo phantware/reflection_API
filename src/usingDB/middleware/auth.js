@@ -3,6 +3,7 @@ import db from '../db';
 
 const Auth = {
   //Verify Token
+
   async verifyToken(req, res, next) {
     const token = req.headers['x-access-token'];
     if (!token) {
@@ -18,7 +19,7 @@ const Auth = {
           .send({ message: 'The token you provided is invalid' });
       }
       req.user = { id: decoded.userId };
-      next();
+      return next();
     } catch (error) {
       return res.status(400).send(error);
     }
