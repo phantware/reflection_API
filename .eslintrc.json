@@ -16,6 +16,6 @@
   "rules": {
     "no-console": "off",
     "quotes": [2, "single"],
-    "comma-dangle": ["error", "always"]
+    "comma-dangle": ["error", "never"]
   }
 }
